@@ -3385,3 +3385,7 @@ html.js-anim .bar-fill:not(.is-in),
 .why {
   margin-top: var(--sec-y);
 }
+
+.svc {
+  padding-block: var(--sec-y) 0;
+}
