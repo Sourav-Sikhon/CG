@@ -1,7 +1,7 @@
 "use client";
 import { useLayoutEffect, useRef } from "react";
 import Split from "./Split";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 import { SERVICES, SITE } from "@/lib/content";
 
 const TOTAL = SERVICES.length;
@@ -14,33 +14,51 @@ export default function Services() {
   const root = useRef<HTMLElement>(null);
   const num = useRef<HTMLSpanElement>(null);
   const bar = useRef<HTMLElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const winRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const el = root.current;
-    if (!el || !document.documentElement.classList.contains("js-anim")) return;
-    const ctx = gsap.context(() => {
-      el.querySelectorAll<HTMLElement>(".svc-card").forEach((card, i) => {
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top 60%",
-          end: "bottom 60%",
-          onToggle: (self) => {
-            if (!self.isActive) return;
-            if (num.current) num.current.textContent = String(i + 1).padStart(2, "0");
-            if (bar.current) bar.current.style.transform = `scaleX(${(i + 1) / TOTAL})`;
+    const win = winRef.current;
+    const list = listRef.current;
+    if (!el || !win || !list || !document.documentElement.classList.contains("js-anim")) return;
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 901px)", () => {
+      const cards = Array.from(list.querySelectorAll<HTMLElement>(".svc-card"));
+      const last = cards.length - 1;
+      let shown = -1;
+      gsap.set(cards, { autoAlpha: 0, y: 36 });
+      gsap.set(cards[0], { autoAlpha: 1, y: 0 });
+      // cards are stacked in the same spot: each one leaves, then the next arrives
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.inOut" },
+        scrollTrigger: {
+          trigger: el,
+          start: "center center",
+          end: () => "+=" + (160 * last + 240),
+          pin: true,
+          scrub: 0.8,
+          snap: { snapTo: 1 / last, duration: { min: 0.3, max: 0.7 }, ease: "power2.inOut" },
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const idx = Math.round(self.progress * last);
+            if (idx === shown) return;
+            shown = idx;
+            if (num.current) num.current.textContent = String(idx + 1).padStart(2, "0");
+            if (bar.current) bar.current.style.transform = `scaleX(${(idx + 1) / TOTAL})`;
           },
-        });
-        const art = card.querySelector(".svc-art img");
-        if (art && window.matchMedia("(min-width: 901px)").matches) {
-          gsap.fromTo(
-            art,
-            { yPercent: 14, rotate: -8 },
-            { yPercent: -14, rotate: 8, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true } },
-          );
-        }
+        },
       });
-    }, el);
-    return () => ctx.revert();
+      for (let i = 1; i <= last; i++) {
+        tl.to(cards[i - 1], { autoAlpha: 0, y: -36, duration: 0.38 }, i - 1 + 0.2)
+          .fromTo(cards[i], { autoAlpha: 0, y: 36 }, { autoAlpha: 1, y: 0, duration: 0.42 }, i - 1 + 0.5);
+      }
+      tl.to({}, { duration: 0.001 }, last);
+      return () => {
+        gsap.set(cards, { clearProps: "all" });
+      };
+    });
+    return () => mm.revert();
   }, []);
 
   return (
@@ -73,9 +91,10 @@ export default function Services() {
           </div>
         </div>
 
-        <div className="svc-list" role="list">
+        <div className="svc-window" ref={winRef}>
+        <div className="svc-list" role="list" ref={listRef}>
           {SERVICES.map((s, i) => (
-            <a key={s.title} href={s.href} className="svc-card" role="listitem" data-reveal>
+            <a key={s.title} href={s.href} className="svc-card" role="listitem">
               <span className="svc-text">
                 <span className="svc-no">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{s.title}</h3>
@@ -90,6 +109,7 @@ export default function Services() {
               </span>
             </a>
           ))}
+        </div>
         </div>
       </div>
     </section>

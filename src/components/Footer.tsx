@@ -1,4 +1,5 @@
 import Split from "./Split";
+import Contact from "./Contact";
 import { Brand } from "./Header";
 import { FOOTER, SITE } from "@/lib/content";
 
@@ -33,16 +34,20 @@ export default function Footer() {
         </div>
       </section>
 
+      <Contact />
+
       <footer className="footer">
+        <img className="footer-video" src="/img/site/footer-bg.webp" alt="" aria-hidden="true" />
+        <div className="footer-tint" aria-hidden="true" />
         <div className="footer-grid">
-          <div>
-            <Brand dark />
+          <div className="f-about">
+            <h4>About Us</h4>
             <p className="about-line">
               Care Guide delivers comprehensive digital, creative, and operational solutions to help businesses enhance efficiency, elevate their brand, and scale with confidence.
             </p>
             <div className="socials">
               {FOOTER.social.map((s) => (
-                <a key={s.label} href={s.href} aria-label={s.label} target="_blank" rel="noreferrer">
+                <a key={s.label} href={s.href} className={"soc-" + s.icon.replace("fa-", "")} aria-label={s.label} target="_blank" rel="noreferrer">
                   <i className={`fa-brands ${s.icon}`} aria-hidden="true" />
                 </a>
               ))}
@@ -59,7 +64,7 @@ export default function Footer() {
             </ul>
           </nav>
           <nav aria-label="Services">
-            <h4>Service</h4>
+            <h4>Services</h4>
             <ul>
               {FOOTER.service.map((l) => (
                 <li key={l.label}>
@@ -76,17 +81,21 @@ export default function Footer() {
                   <a href={l.href}>{l.label}</a>
                 </li>
               ))}
-              <li>
-                <a href="https://basis.org.bd/company-profile/25-12-034" target="_blank" rel="noreferrer">
-                  BASIS Membership
-                </a>
-              </li>
             </ul>
           </nav>
+          <div className="f-member">
+            <h4>Membership</h4>
+            <a href="https://basis.org.bd/company-profile/25-12-034" target="_blank" rel="noreferrer" aria-label="BASIS member">
+              <img src="/img/site/badge-member.webp" alt="Member" width={132} height={79} />
+              <img src="/img/site/badge-basis.webp" alt="BASIS, Bangladesh Association of Software and Information Services" width={132} height={80} />
+            </a>
+          </div>
         </div>
         <div className="footer-base">
-          <span>© 2026 Care Guide. All rights reserved.</span>
-          <span>Dhaka, Bangladesh · Since 2022</span>
+          <Brand dark />
+          <span>
+            © 2026 <b>Care Guide</b> all rights reserved.
+          </span>
         </div>
       </footer>
     </>

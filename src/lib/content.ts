@@ -124,6 +124,8 @@ export const FOOTER = {
     { label: "Home", href: SITE + "/" },
     { label: "About Us", href: SITE + "/about/" },
     { label: "Contact Us", href: SITE + "/contact/" },
+    { label: "Service", href: SITE + "/service/" },
+    { label: "Our Team", href: "#leadership" },
   ],
   service: [
     { label: "Web Development", href: SITE + "/service/web-development/" },
@@ -141,6 +143,7 @@ export const FOOTER = {
     { icon: "fa-facebook-f", label: "Facebook", href: "https://www.facebook.com/CareGuideLLC" },
     { icon: "fa-linkedin-in", label: "LinkedIn", href: "https://www.linkedin.com/company/care-guide-bd/" },
     { icon: "fa-instagram", label: "Instagram", href: "https://www.instagram.com/care.guide.bd/" },
+    { icon: "fa-x-twitter", label: "X", href: "https://x.com/" },
   ],
 };
 
