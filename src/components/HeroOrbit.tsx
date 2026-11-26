@@ -16,8 +16,8 @@ const TILT = 0.8;
 const SPIN = 0.13;
 const CENTER = { x: 0.775, y: 0.74 };
 
-const ORANGE = new THREE.Color("#f6794e");
-const PEACH = new THREE.Color("#fcdcc0");
+const ORANGE = new THREE.Color("#ff3b00");
+const PEACH = new THREE.Color("#ffd0c0");
 const FROST = new THREE.Color("#f1eeea");
 const WHITE = new THREE.Color("#f7f5f2");
 
@@ -126,7 +126,7 @@ function Scene({ part, mouse }: { part: "back" | "front"; mouse: React.MutableRe
         <>
           <mesh ref={orange} scale={w * 0.0165}>
             <sphereGeometry args={[1, 48, 48]} />
-            <meshPhysicalMaterial color="#f6794e" roughness={0.3} clearcoat={1} clearcoatRoughness={0.12} />
+            <meshPhysicalMaterial color="#ff3b00" roughness={0.3} clearcoat={1} clearcoatRoughness={0.12} />
           </mesh>
           <mesh ref={glass} scale={w * 0.02}>
             <sphereGeometry args={[1, 48, 48]} />

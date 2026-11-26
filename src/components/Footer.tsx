@@ -14,6 +14,9 @@ export default function Footer() {
         <p data-reveal>
           Tell us where operations, technology or growth feel heavy. We will help you lighten the load with a team that delivers with speed, care and precision.
         </p>
+        <p data-reveal>
+          We offer services like customer support, back office tasks, digital marketing, web development, IT support, virtual assistance, and content creation, designed to boost brand loyalty and reduce costs.
+        </p>
         <div className="cta-row" data-reveal>
           <a href={`${SITE}/contact/`} className="btn btn-amber">
             Work together

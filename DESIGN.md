@@ -1,14 +1,14 @@
 ---
 name: Care Guide — The Lighthouse
-description: Warm paper canvas, navy night panels and one amber beam. Wide display type, pill CTAs with arrow chips, glass 3D lighthouse hero.
+description: Warm paper canvas, navy night panels and one brand-red beam. Wide display type, pill CTAs with arrow chips, glass 3D lighthouse hero.
 colors:
   navy: "#1B2A5C"
   navy-deep: "#111C42"
   navy-ink: "#0A1230"
-  amber: "#E58A1F"
-  amber-bright: "#F29A33"
-  amber-text: "#B95F08"
-  amber-soft: "#FBEAD3"
+  amber: "#FF3B00"
+  amber-bright: "#FF6A3D"
+  amber-text: "#CC2B00"
+  amber-soft: "#FFE3DA"
   canvas: "#EEEDE9"
   paper: "#F7F6F2"
   ink: "#101735"
@@ -60,7 +60,7 @@ A lighthouse guides ships through fog; Care Guide guides a business through oper
 
 ## Colors
 
-Navy and amber come straight from the logo. Canvas and paper are warm greys so the glass render and photos sit naturally. Amber on light grounds uses `amber-text` (#B95F08) to hold contrast; `amber` fills buttons and bars.
+Navy and amber come straight from the logo. Canvas and paper are warm greys so the glass render and photos sit naturally. Amber on light grounds uses `amber-text` (#CC2B00) to hold contrast; `amber` fills buttons and bars.
 
 ## Typography
 

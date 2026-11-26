@@ -1,85 +1,57 @@
-"use client";
-import { useLayoutEffect, useRef } from "react";
-import Split from "./Split";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { BARS, WHY } from "@/lib/content";
 
-const WHY_ICONS = ["fa-comments", "fa-life-ring", "fa-lightbulb"];
+const G = "url(#why-grad)";
 
-/** Dark panel that opens from a card to full-bleed, then walks through three reasons while pinned. */
+const ICONS = [
+  // chat
+  <g key="chat">
+    <path fill={G} opacity="0.55" d="M19.5 7.5A3.5 3.5 0 0 1 22 11v2.5a3.5 3.5 0 0 1-2 3.2V20l-3.4-2.4h-2.2A4.5 4.5 0 0 0 17 13.5V8.2c.9.1 1.8-.2 2.5-.7Z" />
+    <path fill={G} d="M3 8.5A4.5 4.5 0 0 1 7.5 4h6A4.5 4.5 0 0 1 18 8.5v3a4.5 4.5 0 0 1-4.5 4.5H9.6L5 19.5V15.7A4.5 4.5 0 0 1 3 11.9Z" />
+  </g>,
+  // shield + check
+  <g key="shield">
+    <path fill={G} d="M12 2.2 19.8 5v6.2c0 4.8-3.2 8.9-7.8 10.6-4.6-1.7-7.8-5.8-7.8-10.6V5Z" />
+    <path d="m8.4 12.2 2.5 2.5 4.7-5" fill="none" stroke="#071647" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" />
+  </g>,
+  // bulb
+  <g key="bulb">
+    <path fill={G} d="M12 2a6.6 6.6 0 0 0-3.8 12c.6.5.9 1 .9 1.7v.3h5.8v-.3c0-.7.3-1.2.9-1.7A6.6 6.6 0 0 0 12 2Z" />
+    <rect fill={G} x="9.2" y="17.4" width="5.6" height="2.1" rx="1" />
+    <rect fill={G} x="10.2" y="20.3" width="3.6" height="1.7" rx=".85" />
+  </g>,
+];
+
+/** Dark glass panel: three reasons on the left, proof bars on the right. Static, no scroll effects. */
 export default function Why() {
-  const root = useRef<HTMLElement>(null);
-
-  useLayoutEffect(() => {
-    const el = root.current;
-    if (!el || !document.documentElement.classList.contains("js-anim")) return;
-    const mm = gsap.matchMedia();
-
-    const ctx = gsap.context(() => {
-      // 1. panel expands as the section enters
-      gsap.fromTo(
-        ".why-panel",
-        { clipPath: "inset(10% 4% round 44px)" },
-        {
-          clipPath: "inset(0% 0% round 0px)",
-          ease: "none",
-          scrollTrigger: { trigger: el, start: "top 90%", end: "top 8%", scrub: true },
-        }
-      );
-      // fog lifts
-      gsap.to(".fog.f3", { yPercent: -60, opacity: 0, ease: "none", scrollTrigger: { trigger: el, start: "top 60%", end: "top top", scrub: true } });
-      gsap.fromTo(".why .display", { filter: "blur(10px)", opacity: 0.4 }, { filter: "blur(0px)", opacity: 1, ease: "none", scrollTrigger: { trigger: el, start: "top 70%", end: "top 20%", scrub: true } });
-
-      // 2. bars fill when visible
-      ScrollTrigger.create({
-        trigger: ".bars",
-        start: "top 85%",
-        once: true,
-        onEnter: () => {
-          gsap.utils.toArray<HTMLElement>(".bar-fill", el).forEach((b) => b.classList.add("is-in"));
-          gsap.fromTo(".bar-fill", { scaleX: 0 }, { scaleX: 1, duration: 1.8, ease: "expo.out", stagger: 0.15 });
-        },
-      });
-
-      // 3. steps light up in sequence (pinned on desktop, scroll-linked on mobile)
-      const steps = gsap.utils.toArray<HTMLElement>(".why-step", el);
-      const setOn = (i: number) => steps.forEach((s, j) => s.classList.toggle("is-on", j <= i));
-      mm.add("(min-width: 901px)", () => {
-        setOn(0);
-        ScrollTrigger.create({
-          trigger: ".why-stage",
-          start: "top top",
-          end: "+=110%",
-          pin: true,
-          onUpdate: (self) => setOn(Math.min(steps.length - 1, Math.floor(self.progress * steps.length * 0.999))),
-        });
-      });
-      mm.add("(max-width: 900px)", () => {
-        steps.forEach((s) => ScrollTrigger.create({ trigger: s, start: "top 75%", onEnter: () => s.classList.add("is-on") }));
-      });
-    }, el);
-
-    return () => {
-      mm.revert();
-      ctx.revert();
-    };
-  }, []);
-
   return (
-    <section className="why" ref={root} id="why" aria-labelledby="why-title">
+    <section className="why" id="why" aria-labelledby="why-title">
+      <svg width="0" height="0" aria-hidden="true" focusable="false" style={{ position: "absolute" }}>
+        <defs>
+          <linearGradient id="why-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#a9ddff" />
+            <stop offset="1" stopColor="#2f7bff" />
+          </linearGradient>
+        </defs>
+      </svg>
       <div className="why-stage">
         <div className="why-panel" aria-hidden="true">
           <div className="fog f1" />
           <div className="fog f2" />
-          <div className="fog f3" />
         </div>
         <div className="wrap why-inner">
           <div>
-            <Split as="h2" className="display" text="Why businesses choose Care Guide" accent={["choose"]} start="top 80%" />
+            <h2 id="why-title" className="display">
+              Why businesses <span className="accent">choose</span> Care Guide
+            </h2>
+            <span className="why-rule" aria-hidden="true" />
             <div className="why-steps">
               {WHY.map((w, i) => (
-                <div className="why-step" key={w.title}>
-                  <i className={`fa-solid ${WHY_ICONS[i]}`} aria-hidden="true" />
+                <div className="why-step is-on" key={w.title}>
+                  <span className="why-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="40" height="40">
+                      {ICONS[i]}
+                    </svg>
+                  </span>
                   <div>
                     <h3>{w.title}</h3>
                     <p>{w.body}</p>
@@ -89,9 +61,18 @@ export default function Why() {
             </div>
           </div>
           <div className="bars">
-            <p>
-              We prioritize client satisfaction and professional growth. A team that values people, purpose, and progress, measured where it counts.
-            </p>
+            <div className="bars-head">
+              <span className="why-icon why-icon-round" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="30" height="30">
+                  <rect fill={G} x="4" y="13" width="4" height="7" rx="1.2" />
+                  <rect fill={G} x="10" y="9" width="4" height="11" rx="1.2" />
+                  <rect fill={G} x="16" y="4" width="4" height="16" rx="1.2" />
+                </svg>
+              </span>
+              <p>
+                We prioritize client satisfaction and professional growth. A team that values people, purpose, and progress, measured where it counts.
+              </p>
+            </div>
             {BARS.map((b) => (
               <div className="bar-row" key={b.label}>
                 <header>
@@ -99,7 +80,7 @@ export default function Why() {
                   <b>{b.value}%</b>
                 </header>
                 <div className="bar-track" role="img" aria-label={`${b.label}: ${b.value}%`}>
-                  <div className="bar-fill" style={{ ["--v" as string]: `${b.value}%` }} />
+                  <div className="bar-fill is-in" style={{ ["--v" as string]: `${b.value}%` }} />
                 </div>
               </div>
             ))}

@@ -3,9 +3,9 @@ import { POSTS, SITE } from "@/lib/content";
 
 export default function Insights() {
   return (
-    <section className="section" id="insights" aria-labelledby="insights-title" style={{ paddingTop: 0 }}>
+    <section className="section ins" id="insights" aria-labelledby="insights-title" style={{ paddingTop: 0 }}>
       <div className="wrap">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "end", gap: 24, flexWrap: "wrap" }}>
+        <div className="ins-head">
           <div>
             <h2 id="insights-title" className="sr-only">
               Latest insights
@@ -21,17 +21,25 @@ export default function Insights() {
             </a>
           </div>
         </div>
-        <div className="post-list">
-          {POSTS.map((p) => (
-            <a key={p.href} href={p.href} className="post" data-reveal>
-              <time className="mono">{p.date}</time>
-              <h3>{p.title}</h3>
-              <span className="p-arrow" aria-hidden="true">
-                <i className="fa-solid fa-arrow-right" />
-              </span>
-            </a>
+
+        <ul className="ins-grid">
+          {POSTS.slice(0, 5).map((p, i) => (
+            <li key={p.href} data-reveal>
+              <a href={p.href} className="ins-card" data-tone={i % 2 === 0 ? "white" : "orange"}>
+                <span className="ins-top">
+                  <span className="ins-num">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="ins-go" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M8 7h9v9" />
+                    </svg>
+                  </span>
+                </span>
+                <h3>{p.title}</h3>
+                <time className="mono">{p.date}</time>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

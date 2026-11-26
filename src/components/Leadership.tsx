@@ -1,59 +1,44 @@
-"use client";
-import { useLayoutEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { QUOTE } from "@/lib/content";
 
-/** Quote that lights up word by word as you scroll through it. */
+const [lead] = QUOTE.split(/(?<=solutions\.)\s+/);
+
 export default function Leadership() {
-  const root = useRef<HTMLElement>(null);
-  const words = QUOTE.split(" ");
-
-  useLayoutEffect(() => {
-    const el = root.current;
-    if (!el || !document.documentElement.classList.contains("js-anim")) return;
-    const ctx = gsap.context(() => {
-      gsap.to(".qw", {
-        opacity: 1,
-        ease: "none",
-        stagger: 0.12,
-        scrollTrigger: { trigger: ".leader-quote", start: "top 78%", end: "bottom 45%", scrub: 0.6 },
-      });
-      gsap.fromTo(
-        ".leader-photo img",
-        { scale: 0.9, rotate: -4 },
-        { scale: 1, rotate: 0, ease: "none", scrollTrigger: { trigger: ".leader-photo", start: "top 90%", end: "top 30%", scrub: true } }
-      );
-    }, el);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section className="section" ref={root} id="leadership" aria-labelledby="leader-title">
-      <div className="wrap leader-grid">
-        <div className="leader-photo">
-          <img src="/img/site/about-about2.webp" alt="Nusrat Shova, CEO and Founder of Care Guide" width={600} height={600} loading="lazy" />
-        </div>
-        <div>
-          <h2 id="leader-title" className="sr-only">
-            Leadership perspective
-          </h2>
-          <blockquote style={{ margin: 0 }}>
-            <p className="leader-quote">
-              {words.map((w, i) => (
-                <span key={i}>
-                  <span className="qw">{w}</span>
-                  {i < words.length - 1 ? " " : null}
-                </span>
-              ))}
+    <section className="section" id="leadership" aria-labelledby="leader-title">
+      <div className="wrap">
+        <div className="ldr">
+          <div className="ldr-copy">
+            <p className="ldr-eyebrow" data-reveal>
+              Leadership Perspective
             </p>
-          </blockquote>
-          <div className="leader-by" data-reveal>
-            <span className="rule" aria-hidden="true" />
-            <div>
+            <h2 id="leader-title" className="ldr-title" data-reveal>
+              Building <em>Scalable</em>
+              <br />
+              Business Solutions
+            </h2>
+            <blockquote className="ldr-quote" data-reveal>
+              <p>“{lead}”</p>
+            </blockquote>
+            <div className="ldr-by" data-reveal>
               <b>Nusrat Shova</b>
-              <span>CEO &amp; Founder, Care Guide</span>
+              <span>CEO &amp; Founder</span>
             </div>
           </div>
+
+          <div className="ldr-visual" aria-hidden="true">
+            <span className="ldr-circle" />
+            <span className="ldr-arc" />
+            <svg className="ldr-spark" viewBox="0 0 40 40" width="40" height="40">
+              <defs>
+                <linearGradient id="ldr-g" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stopColor="#ffb48a" />
+                  <stop offset="1" stopColor="#ff6a3d" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#ldr-g)" d="M20 0c1.700 10.500 7.500 18.300 20 20-12.500 1.700-18.300 9.500-20 20-1.700-10.500-7.500-18.300-20-20C12.500 18.300 18.300 10.500 20 0Z" />
+            </svg>
+          </div>
+          <img className="ldr-photo" src="/img/site/leader-nusrat.webp" alt="Nusrat Shova, CEO and Founder of Care Guide" width={960} height={960} loading="lazy" />
         </div>
       </div>
     </section>

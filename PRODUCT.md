@@ -21,7 +21,7 @@ Care Guide (Dhaka, since 2022) is a back office support and digital technology p
 
 ## Brand Commitments
 
-- Logo: the lighthouse mark (navy `#1B2A5C`, amber `#E58A1F`) and the supplied glass 3D lighthouse render.
+- Logo: the lighthouse mark (navy `#1B2A5C`, amber `#FF3B00`) and the supplied glass 3D lighthouse render.
 - Palette is derived from the logo. Navy is the night, amber is the beam.
 - Real copy and figures only (1k+ monthly tasks, 3+ years, 55+ team, 99% satisfaction, three 99% bars) as published on careguidebd.com.
 

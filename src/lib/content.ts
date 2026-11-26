@@ -48,17 +48,17 @@ export const SERVICES = [
 ];
 
 export const PILLARS = [
-  { icon: "fa-notes-medical", title: "Healthcare & Administrative Support", body: "Coordination, documentation, scheduling and operational assistance." },
-  { icon: "fa-folder-tree", title: "Back Office Support", body: "Data processing, billing support, reporting and workflow management." },
-  { icon: "fa-microchip", title: "Digital Technology Services", body: "AI automation, DevOps engineering, web development and software solutions." },
-  { icon: "fa-chart-line", title: "Digital Growth Services", body: "SEO, content strategy, marketing and creative execution." },
+  { img: "/img/site/icon-healthcare.webp", tone: "blue", title: "Healthcare & Administrative Support", body: "Coordination, documentation, scheduling and operational assistance." },
+  { img: "/img/site/icon-office.webp", tone: "orange", title: "Back Office Support", body: "Data processing, billing support, reporting and workflow management." },
+  { img: "/img/site/icon-tech.webp", tone: "blue", title: "Digital Technology Services", body: "AI automation, DevOps engineering, web development and software solutions." },
+  { img: "/img/site/icon-growth.webp", tone: "orange", title: "Digital Growth Services", body: "SEO, content strategy, marketing and creative execution." },
 ];
 
 export const STATS = [
-  { to: 1, suffix: "k+", label: "Monthly tasks delivered" },
-  { to: 3, suffix: "+", label: "Years of experience" },
-  { to: 55, suffix: "+", label: "Expert team members" },
-  { to: 99, suffix: "%", label: "Client satisfaction" },
+  { to: 10, suffix: "k+", unit: "", icon: "fa-regular fa-square-check", tag: "Volume", label: "Monthly Tasks Delivered" },
+  { to: 3, suffix: "+", unit: " Years", icon: "fa-solid fa-hourglass-half", tag: "Longevity", label: "Experience" },
+  { to: 50, suffix: "+", unit: "", icon: "fa-solid fa-users", tag: "Workforce", label: "Expert Team Members" },
+  { to: 99, suffix: "%", unit: "", icon: "fa-solid fa-handshake", tag: "Retention", label: "Client Satisfaction Rate" },
 ];
 
 export const WHY = [
@@ -85,18 +85,13 @@ export const EVENTS = [
 ];
 
 export const REQUIREMENTS = [
-  { icon: "fa-graduation-cap", title: "Education", body: "Minimum Higher Secondary. Bachelor’s/Honors preferred but not mandatory." },
-  { icon: "fa-language", title: "Fluency", body: "Must be fluent in English. Hindi speaking is a strong advantage." },
-  { icon: "fa-briefcase", title: "Experience", body: "Minimum 1 year in BPO/Call Center. Freshers are also welcome." },
-  { icon: "fa-list-check", title: "Key skills", body: "MS Word/Excel, communication skills, grooming, punctuality, adaptability." },
+  { icon: "fa-graduation-cap", title: "Education Requirement", body: "Minimum Higher Secondary. Bachelor’s/Honors preferred but not mandatory." },
+  { icon: "fa-comment-dots", title: "Fluency Requirement", body: "Must be fluent in English. Hindi speaking is a strong advantage." },
+  { icon: "fa-briefcase", title: "Experience Needed", body: "Minimum 1 year in BPO/Call Center. Freshers are also welcome." },
+  { icon: "fa-star", title: "Key Skills", body: "MS Word/Excel, communication skills, grooming, punctuality, adaptability." },
 ];
 
 export const POSTS = [
-  {
-    date: "September 25, 2026",
-    title: "How to Become an English Speaking Coordinator in Bangladesh",
-    href: `${SITE}/blog/how-to-become-english-speaking-coordinator-bangladesh/`,
-  },
   {
     date: "September 29, 2026",
     title: "Content Writer Jobs in Dhaka, Bangladesh: Build Your SEO Content Career at Care Guide",
@@ -106,6 +101,21 @@ export const POSTS = [
     date: "September 29, 2026",
     title: "Cinematographer Jobs in Dhaka, Bangladesh: Build Your Visual Storytelling Career at Care Guide",
     href: `${SITE}/blog/cinematographer-jobs-dhaka/`,
+  },
+  {
+    date: "September 29, 2026",
+    title: "Google Ads & PPC Specialist Jobs in Dhaka, Bangladesh: Build Your Performance Marketing Career at Care Guide",
+    href: `${SITE}/blog/google-ads-specialist-jobs-dhaka/`,
+  },
+  {
+    date: "September 29, 2026",
+    title: "Graphic Designer Jobs in Dhaka, Bangladesh: Build Your Creative Design Career at Care Guide",
+    href: `${SITE}/blog/graphic-designer-jobs-dhaka/`,
+  },
+  {
+    date: "September 29, 2026",
+    title: "UI/UX Designer Jobs in Dhaka, Bangladesh: Build Your User Experience Design Career at Care Guide",
+    href: `${SITE}/blog/ui-ux-designer-jobs-dhaka/`,
   },
 ];
 
