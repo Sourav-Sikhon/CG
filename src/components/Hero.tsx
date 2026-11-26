@@ -53,7 +53,6 @@ export default function Hero() {
 
         <div className="hero-deco" aria-hidden="true">
           <span className="hero-ghost">Care Guide</span>
-          <span className="hero-dots" />
         </div>
 
         <HeroOrbit />
